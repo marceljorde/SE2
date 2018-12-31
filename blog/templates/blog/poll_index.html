@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="w3-content" style="max-width: 100%; padding-left: 20%">
+        <div class="w3-row">
+            {% if latest_question_list %}
+                {% for question in latest_question_list %}
+                    <div style="padding-right: 30%">
+                        <div class ="w3-card-4 w3-margin w3-white">
+                            <div class="w3-container">
+                                <div style="text-align: center">
+                                        <h3>{{question.question_text}}</h3>
+                                </div>
+                                <hr>
+                                <p style="text-align: center">
+                                    <a href="{% url 'poll_detail' question.id %}" style="color:black"> Zur Abstimmung  </a>
+                                </p>
+                                 
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}    
+            {% else %}
+                <div style="padding-right: 30%">
+                    <div class ="w3-card-4 w3-margin w3-white">
+                        <div class="w3-container">
+                                <div style="text-align: center"></div>
+                                    <h3>Keine Umfragen verfügbar</h3>
+                                </div>
+                            </div>
+                    </div>
+                
+                
+            {% endif %}
+        </div>
+</div>
+
+{% endblock %}

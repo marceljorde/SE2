@@ -5,12 +5,12 @@
         <div class="w3-row">
             <div style="padding-right: 4%">
                 <div class ="w3-card-4 w3-margin w3-white">
-                    <h3 style="text-align: center">Post</h3>
+                    <h3 style="text-align: center">Neuer Kommentar</h3>
                     <div class="w3-container">
                         <form method="POST" class="post-form">
                             {% csrf_token %}
                             {{ form.as_p }}
-                            <button type="submit" class="save btn btn-default">Speichern</button>
+                            <button type="submit" class ="save btn btn-default" >Senden</button>
                         </form>
                     </div>
                 </div>

@@ -1,0 +1,33 @@
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<div class="w3-content" style="max-width: 100%; padding-left: 20%">
+        <div class="w3-row">
+            {% for todo in todos %}
+                <div style="padding-right: 30%">
+                    <div class ="w3-card-4 w3-margin w3-white">
+                        <div class="w3-container">
+                            <div style="text-align: center">
+                                <h3>{{todo.title}}</h3>
+                            </div>
+                            <hr>
+                            <p style="display: inline;color:crimson">
+                                Frist : {{todo.finish_date}}
+                            </p>
+                            <p style="float: right">
+                                <a href="/se2/todo/{{todo.id}}"><span class="glyphicon glyphicon-info-sign" style="font-size: 1.5em; color: #000;"></span></a> 
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+</div>
+
+
+
+
+{% endblock %}

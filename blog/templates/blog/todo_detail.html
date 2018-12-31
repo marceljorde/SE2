@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="w3-content" style="max-width: 100%; padding-left: 20%">
+        <div class="w3-row">
+                <div style="padding-right: 30%">
+                        <div class ="w3-card-4 w3-margin w3-white">
+                            <div class="w3-container">
+                                <div style="text-align: center;">
+                                    <h3>{{todo.title}}</h3>
+                                </div>
+                                <hr>
+                                <h5 style="text-decoration:underline">
+                                    Beschreibung:
+                                </h5>
+                                <p style="padding-left: 18%;">{{todo.text}}</p>
+
+                                <p style="display:inline; color:crimson">Frist : {{todo.finish_date}}</p>
+                                <p style="float: right">
+                                   <a href="{% url 'todo' %}"> <span class="glyphicon glyphicon-circle-arrow-left" style="font-size: 1.5em; color: #000;"></span></a>
+                                </p>
+                            </div>
+                        </div>
+                </div>
+        </div>
+</div>
+
+{% endblock %}

@@ -1,16 +1,59 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <div class = "post">
-        {% if post.published_date %}
-            <div class="date">
-                {{post.published_date}}
+    <div class="w3-content" style="max-width: 100%; padding-left: 4%">
+        <div class="w3-row">
+            <div style="padding-right: 4%">
+                <div class ="w3-card-4 w3-margin w3-white">
+                    <div class="w3-container">
+                        <h3>
+                            {{post.title}}
+                            {% if user.is_staff %}
+                            <a class="btn btn-default" style="float:right" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-default" style="float:right" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                            {% endif %}
+                        </h3>
+                        <h5>
+                            von: {{post.author}},
+                            <span class="w3-opacity">veröffentlicht: {{post.published_date}}</span>     
+                        </h5>
+                    </div>
+                    <div class="w3-container">
+                        <p>{{post.text|linebreaksbr}}</p>
+                    </div>
+                    
+
+                    <hr>
+
+                    {% for comment in post.comments.all %}
+                        <div class="w3-container">
+                            {% if user.is_staff %}
+                                <div style="float:right">
+                                    <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                                </div>
+                            {% endif %}         
+                            <strong> {{ comment.author }}</strong>  <span class="w3-opacity">veröffentlicht: {{comment.created_date}}</span> 
+                            <p> {{ comment.text|linebreaks }}</p>
+                            <hr>
+                        </div>
+                    {% empty %}
+                        <div class="w3-container">
+                            <p>Noch Keine Kommentare vorhanden :( </p>
+                        </div>
+                    {% endfor %}
+
+                    {% if user.is_authenticated %} 
+                        <div class="w3-container">
+                            <div style ="text-align: center">
+                                <a class="btn btn-default"  href="{% url 'add_comment_to_post' pk=post.pk %}">Kommentar hinzufügen</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
-        {% endif %}
-        {% if user.is_authenticated %}
-        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-        {% endif %}
-        <h2> {{ post.title }}</h2>
-        <p> {{ post.text |linebreaksbr }}</p>
+        </div>
     </div>
+
+   
+
 {% endblock %}
